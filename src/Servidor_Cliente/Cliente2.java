@@ -7,8 +7,7 @@ import java.net.Socket;
 
 import javax.swing.JOptionPane;
 
-public class Servidor_Cliente {
-
+public class Cliente2 {
     public static void main(String[] args){
         
         int serverPort = 4000;             // Porta do servidor

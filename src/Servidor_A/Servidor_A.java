@@ -12,7 +12,7 @@ public class Servidor_A {
         int[] clientCount = {0}; // Usando um array para armazenar o contador
         String serveNome = "Servidor_A";
 
-        Metodos ServerMetodos = new Metodos(); // Funções Necessarias
+        Metodos serverMetodos = new Metodos(); // Funções Necessarias
 
         // Abrindo Conexão do servidor
         try (ServerSocket serverSocket = new ServerSocket(serverPort)) {
@@ -27,23 +27,24 @@ public class Servidor_A {
 
                 // Incrementar o contador de clientes
                 clientCount[0]++;
-
                 System.out.println("Clientes conectados: " + clientCount[0]);
+                
+                // Enviar o valor de clientCount para o cliente
+                PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
+                out.println(clientCount[0]);
 
                 // Tratar a conexão em uma thread separada para permitir o atendimento a múltiplos clientes
                 Thread thread = new Thread(() -> {
                     try {
-                        // Enviar o valor de clientCount para o cliente
-                        PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
-                        out.println(clientCount[0] - 1);
-                        
                         //Chamar função de recebimento de dados.
-                        ServerMetodos.receberArquivo(clientSocket, serveNome);
+                        serverMetodos.receberArquivo(clientSocket, serveNome);
+
                     } catch (IOException e) {
-                        clientCount[0]--;
                         System.out.println("-> Servidor perdeu Conexão com o cliente!!" 
                                                +"\nClientes conectados: " + clientCount[0]);
                         
+                    } finally{
+                        clientCount[0]--;
                     }
                 });
                 thread.start();
