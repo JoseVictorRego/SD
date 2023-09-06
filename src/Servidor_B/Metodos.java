@@ -18,29 +18,27 @@ public class Metodos {
     private static Map<String, String> clientFolders = new HashMap<>(); // Mapear o nome do cliente para a pasta
 
     public void receberArquivo(Socket clientSocket, String serveNome) throws IOException {
-        
         InputStream is = clientSocket.getInputStream();
         // Receber o nome do cliente
-        
+        BufferedReader br = new BufferedReader(new InputStreamReader(is));
 
         try {
-            BufferedReader br = new BufferedReader(new InputStreamReader(is));
+            
             String clientName = new String(br.readLine().getBytes(), "UTF-8");
 
             // Verificar se a pasta do cliente já foi criada
             String saveDir = clientFolders.get(clientName);
             if (saveDir == null) {
-            
                 // Se a pasta ainda não existe, criar uma nova pasta
                 String currentDir = System.getProperty("user.dir");
-                saveDir = currentDir +"\\"+serveNome+"\\"+ "\\arquivos\\" + clientName + "\\";
-            
+                saveDir = currentDir +"\\src\\"+serveNome+"\\"+ "\\arquivos\\" + clientName + "\\";
+                
                 File directory = new File(saveDir);
-            if (!directory.exists()) {
-                directory.mkdirs();
-            }
-            // Adicionar a pasta ao mapa para reutilização futura
-            clientFolders.put(clientName, saveDir);
+                if (!directory.exists()) {
+                    directory.mkdirs();
+                }
+                // Adicionar a pasta ao mapa para reutilização futura
+                clientFolders.put(clientName, saveDir);
             }
 
             // Receber o nome do arquivo
@@ -67,11 +65,11 @@ public class Metodos {
             // Fechando a conexão com o cliente
             clientSocket.close();
             System.out.println("Cliente: "+clientName+" Saiu!!\n");
-
             
             //envio dos arquivos para o servidor Principal
             servePrincipal(clientName, saveDir + fileName);
             System.out.println("\nEnviado dado para o Servidor Principal do cliente:"+clientName+"!!\n");
+
         } catch (Exception e) {
             System.out.println("Conexão do Servidor de Balanceamento finalizada");
         }

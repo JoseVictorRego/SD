@@ -61,7 +61,7 @@ public class Servidor_Cliente {
                         }
 
                         else{// Enviando o nome do cliente e o arquivo com o nome do arquivo/ para iniciar o envio do arquivo ao servidor.
-                            ClienteMetodos.enviarArquivo(socket, clientName, filePath);   
+                            ClienteMetodos.enviarArquivo(mainSocket, clientName, filePath);   
                         }
 
                         // Fechando a conexão
