@@ -27,7 +27,7 @@ public class Metodos {
         if (saveDir == null) {
             // Se a pasta ainda não existe, criar uma nova pasta
             String currentDir = System.getProperty("user.dir");
-            saveDir = currentDir + "\\src\\arquivos\\" + clientName + "\\";
+            saveDir = currentDir + "\\src\\Servidor_Principal\\arquivos\\" + clientName + "\\";
             
             File directory = new File(saveDir);
             if (!directory.exists()) {

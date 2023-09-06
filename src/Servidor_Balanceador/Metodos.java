@@ -13,15 +13,12 @@ public class Metodos {
             BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             String clientCountString = reader.readLine();
             clientCount = Integer.parseInt(clientCountString)-1; //diminuir o servidor de balanceamento.
-
-            System.out.println("Número de clientes conectados: " + clientCount);
             
         } catch (IOException e) {
             clientCount = -1;
             System.out.println("Erro ao se conectar ao servidor: " + e.getMessage());
         }
         
-
         return clientCount;
     }
     

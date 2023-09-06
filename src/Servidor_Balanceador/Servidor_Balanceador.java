@@ -39,40 +39,9 @@ public class Servidor_Balanceador {
                             String redirectMessage = "Servidor em manutencao, tente mais tarde.";
                             clientSocket.getOutputStream().write(redirectMessage.getBytes());
                         }else{
-                            System.out.println(contadorServeA+":"+contadorServeB);
+                            System.out.println("Clientes conectados nos servidores-> "+contadorServeA+":"+contadorServeB);
                             ServerBalanceadorMetodos.redirecionar(clientSocket, serverAddress, Sevidor_Port[escolha]);
                         }
-                        
-                        
-                        /*
-                        //Servidor_A
-                        Contador[0] = ServerBalanceadorMetodos.contador(serverAddress, Sevidor_Port[0]);
-                        System.out.println("Valor:"+ Contador[0]);
-                        //Contador de Cliente em cada Servidor atualmente
-                        System.out.println("\nParte 1, Contador 1: " +serverAddress+", Contador 2: "+Sevidor_Port[0]);
-                        
-                        //Servidor_B
-                        Contador[1] = ServerBalanceadorMetodos.contador(serverAddress, Sevidor_Port[1]);
-
-                        System.out.println("\nParte 1, Contador 1: " +Contador[0]+", Contador 2: "+Contador[1]);
-
-                        //Escolha de redirecionamento
-                        int escolha = ServerBalanceadorMetodos.escolhaRedirecionamento(3,3);
-                        System.out.println("\nParte 2, resposta: " + resposta);
-
-                        if(resposta==0){
-                            System.out.println("Cliente se conectou ao servidor A\n"+serverAddress+"\n"+Sevidor_Port[resposta]);
-                            //ServerBalanceadorMetodos.redirecionar(clientSocket, serverAddress, Sevidor_Port[resposta]);
-                        }
-                        else if(resposta==1){
-                            System.out.println("Cliente se conectou ao servidor B\\n" + serverAddress+ "\n" + Sevidor_Port[resposta]);
-                            //ServerBalanceadorMetodos.redirecionar(clientSocket, serverAddress, Sevidor_Port[resposta]);
-                        }
-                        else{
-                            System.out.println("\nNão encontrou servidores, valor: "+resposta);
-                            String redirectMessage = "Servidor em manutencao, tente mais tarde.";
-                            clientSocket.getOutputStream().write(redirectMessage.getBytes());
-                        } */
                         
                         // Fechar a conexão com o cliente após o redirecionamento
                         clientSocket.close();

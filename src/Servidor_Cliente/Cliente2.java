@@ -60,15 +60,12 @@ public class Cliente2 {
                         }
 
                         else{// Enviando o nome do cliente e o arquivo com o nome do arquivo/ para iniciar o envio do arquivo ao servidor.
-                            ClienteMetodos.enviarArquivo(socket, clientName, filePath);   
+                            ClienteMetodos.enviarArquivo(mainSocket, clientName, filePath);   
                         }
 
                         // Fechando a conexão
                         System.out.println("#Conexão encerrada!");
 
-                        //Mensagem de escolha de iniciar uma nova conexão ou finalizar conexão.
-                        escolha = JOptionPane.showInputDialog("Didite qualquer digito para iniciar uma nova conexão ou '0' para Finalizar Conexão:");
-                    
                     } catch (IOException e) {
                         JOptionPane.showMessageDialog(null, "Servidor não Encontrado "); break;
                     }

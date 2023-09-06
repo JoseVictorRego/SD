@@ -67,9 +67,6 @@ public class Servidor_Cliente {
                         // Fechando a conexão
                         System.out.println("#Conexão encerrada!");
 
-                        //Mensagem de escolha de iniciar uma nova conexão ou finalizar conexão.
-                        escolha = JOptionPane.showInputDialog("Didite qualquer digito para iniciar uma nova conexão ou '0' para Finalizar Conexão:");
-                    
                     } catch (IOException e) {
                         JOptionPane.showMessageDialog(null, "Servidor não Encontrado "); break;
                     }
