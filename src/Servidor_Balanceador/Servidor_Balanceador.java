@@ -29,6 +29,7 @@ public class Servidor_Balanceador {
                 
                 int contadorServeA = ServerBalanceadorMetodos.contador(serverAddress, Sevidor_Port[0]);
                 int contadorServeB = ServerBalanceadorMetodos.contador(serverAddress, Sevidor_Port[1]);
+                
                 int escolha = ServerBalanceadorMetodos.escolhaRedirecionamento(contadorServeA,contadorServeB);
 
                 // Criar uma nova thread para lidar com a conexão do cliente

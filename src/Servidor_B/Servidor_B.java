@@ -29,7 +29,7 @@ public class Servidor_B {
                 clientCount[0]++;
                 System.out.println("Clientes conectados: " + clientCount[0]);
                 
-                // Enviar o valor de clientCount para o cliente
+                // Enviar o valor de clientCount para o Sevido
                 PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
                 out.println(clientCount[0]);
 
