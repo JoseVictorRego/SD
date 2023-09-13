@@ -127,14 +127,21 @@ public class Metodos {
     }
 
     public void servePrincipal(String clientName, String fileCaminho){
-        int serverPrincialPort = 3000;             // Porta do servidor Principal
+        int[] serverPrincialPort = {3000,5000};             // Porta do servidor Principal
         String serverPrincialIp = "127.0.0.1";      // IP do Servidor Principal
         
-        try(Socket socketPrincipal = new Socket(serverPrincialIp, serverPrincialPort)) {
+        try(Socket socketPrincipal = new Socket(serverPrincialIp, serverPrincialPort[0])) {
             enviarArquivo(socketPrincipal, clientName, fileCaminho);
             
         } catch (IOException e) { // Caso não haja conexão com o servidor
             JOptionPane.showMessageDialog(null, "Servidor Principal indisponível!");
+            
+            //iniciar conexão com o serve reserva.
+            try(Socket socketReserva = new Socket(serverPrincialIp, serverPrincialPort[1])) {
+                enviarArquivo(socketReserva,clientName, fileCaminho);
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, "Servidor Reserva indisponível!");
+            }
         }
     }
 }
