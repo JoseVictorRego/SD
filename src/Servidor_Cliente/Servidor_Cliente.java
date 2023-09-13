@@ -3,7 +3,6 @@ package Servidor_Cliente;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.PrintWriter;
 import java.net.Socket;
 
 import javax.swing.JOptionPane;
@@ -46,36 +45,8 @@ public class Servidor_Cliente {
                     int redirectServerPort = Integer.parseInt(parts[1]);
                     System.out.println("#Conexão com o servidor de redirecionamento encerrada!");
 
-                    //Conectar ao servidor principal
-                    try(Socket mainSocket = new Socket(redirectServerIp, redirectServerPort)) {
-                    
-                        // Conectando ao servidor
-                        System.out.println("Conectado ao servidor.");
-
-                        //enviar o seu nome ao servidor
-                        PrintWriter out = new PrintWriter(mainSocket.getOutputStream(), true);
-                        out.println(serveNome);
-
-                        // Solicitação do nome do cliente
-                        String clientName = JOptionPane.showInputDialog("!!Bem-vindo ao nosso servidor!!\n\nDigite o seu nome, para continuar:");
-
-                        // Solicitação do caminho do arquivo a ser enviado
-                        String filePath = JOptionPane.showInputDialog("Digite o caminho completo do arquivo a ser enviado:");
-
-                        if(clientName==null || filePath==null){
-                            JOptionPane.showMessageDialog(null, "Nome do cliente ou arquivo não indentificado!");
-                        }
-
-                        else{// Enviando o nome do cliente e o arquivo com o nome do arquivo/ para iniciar o envio do arquivo ao servidor.
-                            ClienteMetodos.enviarArquivo(mainSocket, clientName, filePath);   
-                        }
-
-                        // Fechando a conexão
-                        System.out.println("#Conexão encerrada!");
-
-                    } catch (IOException e) {
-                        JOptionPane.showMessageDialog(null, "Servidor não Encontrado ");
-                    }
+                    //Conectar ao servidor de envio
+                    ClienteMetodos.comandoPrincipal(serveNome, redirectServerIp, redirectServerPort);
                 }
 
                 // Perguntar ao usuário se deseja iniciar uma nova conexão ou encerrar o programa
