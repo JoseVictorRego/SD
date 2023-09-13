@@ -23,7 +23,7 @@ public class Metodos {
             
         } catch (IOException e) {
             clientCount = -1;
-            System.out.println("Erro ao se conectar ao servidor: " + e.getMessage());
+            System.out.println("Erro ao se conectar ao servidor.");
         }
         
         return clientCount;

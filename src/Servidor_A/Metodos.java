@@ -134,7 +134,7 @@ public class Metodos {
             enviarArquivo(socketPrincipal, clientName, fileCaminho);
             
         } catch (IOException e) { // Caso não haja conexão com o servidor
-            JOptionPane.showMessageDialog(null, "Servidor não Encontrado ");
+            JOptionPane.showMessageDialog(null, "Servidor Principal indisponível!");
         }
     }
 }

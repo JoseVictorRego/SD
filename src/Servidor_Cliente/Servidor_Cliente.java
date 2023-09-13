@@ -74,7 +74,7 @@ public class Servidor_Cliente {
                         System.out.println("#Conexão encerrada!");
 
                     } catch (IOException e) {
-                        JOptionPane.showMessageDialog(null, "Servidor não Encontrado "); break;
+                        JOptionPane.showMessageDialog(null, "Servidor não Encontrado ");
                     }
                 }
 
