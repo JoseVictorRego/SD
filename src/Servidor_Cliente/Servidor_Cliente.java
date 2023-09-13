@@ -3,6 +3,7 @@ package Servidor_Cliente;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.net.Socket;
 
 import javax.swing.JOptionPane;
@@ -13,6 +14,7 @@ public class Servidor_Cliente {
         
         int serverPort = 4000;             // Porta do servidor
         String serveIp = "127.0.0.1";      // IP do Servidor
+        String serveNome = "ServeCliente";
         String escolha;
 
         //Funções de Envio de dados
@@ -49,6 +51,10 @@ public class Servidor_Cliente {
                     
                         // Conectando ao servidor
                         System.out.println("Conectado ao servidor.");
+
+                        //enviar o seu nome ao servidor
+                        PrintWriter out = new PrintWriter(mainSocket.getOutputStream(), true);
+                        out.println(serveNome);
 
                         // Solicitação do nome do cliente
                         String clientName = JOptionPane.showInputDialog("!!Bem-vindo ao nosso servidor!!\n\nDigite o seu nome, para continuar:");

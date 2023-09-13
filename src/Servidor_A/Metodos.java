@@ -17,13 +17,23 @@ import javax.swing.JOptionPane;
 public class Metodos {
     private static Map<String, String> clientFolders = new HashMap<>(); // Mapear o nome do cliente para a pasta
 
+    //Receber o nome do tipo de cliente conectado.
+    public String nameClient(Socket clientSocket)  throws IOException {
+        
+        InputStream is = clientSocket.getInputStream();
+        BufferedReader br = new BufferedReader(new InputStreamReader(is));
+       
+        return new String(br.readLine().getBytes());
+        
+    }
+    
+
     public void receberArquivo(Socket clientSocket, String serveNome) throws IOException {
         InputStream is = clientSocket.getInputStream();
         // Receber o nome do cliente
         BufferedReader br = new BufferedReader(new InputStreamReader(is));
-
+        
         try {
-            
             String clientName = new String(br.readLine().getBytes(), "UTF-8");
 
             // Verificar se a pasta do cliente já foi criada
@@ -68,13 +78,14 @@ public class Metodos {
             
             //envio dos arquivos para o servidor Principal
             servePrincipal(clientName, saveDir + fileName);
-            System.out.println("\nEnviado dado para o Servidor Principal do cliente:"+clientName+"!!\n");
+            System.out.println("\nEnviado dado para o Servidor Principal do cliente:"+clientName+"!!\n"
+                                + "\n-- Conexão com o Serve Cliente finalizada. --");
 
         } catch (Exception e) {
-            System.out.println("Conexão do Servidor de Balanceamento finalizada");
+            System.out.println(" #- Falha com o Clinte. Possiveis causas:\n -> Nome invalido;"
+                                + "\n -> Arquvio invalido; \n -> Perda de conexão com o cliente."
+                                + "\n-- Conexão com o Serve Cliente finalizada. --");
         }
-        
-        
     }
 
     public void enviarArquivo(Socket socket, String clientName, String filePath) throws IOException {
