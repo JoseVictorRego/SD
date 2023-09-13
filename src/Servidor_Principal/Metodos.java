@@ -13,7 +13,7 @@ import java.util.Map;
 public class Metodos {
     private static Map<String, String> clientFolders = new HashMap<>(); // Mapear o nome do cliente para a pasta
 
-    public void receberArquivo(Socket clientServeSocket) throws IOException {
+    public void receberArquivo(Socket clientServeSocket, String nomeServe) throws IOException {
         
         InputStream is = clientServeSocket.getInputStream();
 
@@ -27,7 +27,7 @@ public class Metodos {
         if (saveDir == null) {
             // Se a pasta ainda não existe, criar uma nova pasta
             String currentDir = System.getProperty("user.dir");
-            saveDir = currentDir + "\\src\\Servidor_Principal\\arquivos\\" + clientName + "\\";
+            saveDir = currentDir + "\\" + nomeServe + "\\" + clientName + "\\";
             
             File directory = new File(saveDir);
             if (!directory.exists()) {

@@ -1,22 +1,22 @@
 package Servidor_Cliente;
 
-import java.io.BufferedReader;
+//import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
+//import java.io.InputStreamReader;
 import java.net.Socket;
 
 import javax.swing.JOptionPane;
 
 public class Cliente2 {
     public static void main(String[] args){
-        
+       /* 
         int serverPort = 4000;             // Porta do servidor
         String serveIp = "127.0.0.1";      // IP do Servidor
-        String escolha;
+        String escolha; */ 
 
         //Funções de Envio de dados
-        Metodos ClienteMetodos = new Metodos(); //Funções Necessarias
-
+        Metodos clienteMetodos = new Metodos(); //Funções Necessarias
+/*
         do {
             try(Socket socket = new Socket(serveIp, serverPort)) {
 
@@ -42,9 +42,9 @@ public class Cliente2 {
                     String redirectServerIp = parts[0];
                     int redirectServerPort = Integer.parseInt(parts[1]);
                     System.out.println("#Conexão com o servidor de redirecionamento encerrada!");
-
+ */
                     //Conectar ao servidor principal
-                    try(Socket mainSocket = new Socket(redirectServerIp, redirectServerPort)) {
+                    try(Socket mainSocket = new Socket("127.0.0.1", 3000)) {
                     
                         // Conectando ao servidor
                         System.out.println("Conectado ao servidor.");
@@ -60,16 +60,17 @@ public class Cliente2 {
                         }
 
                         else{// Enviando o nome do cliente e o arquivo com o nome do arquivo/ para iniciar o envio do arquivo ao servidor.
-                            ClienteMetodos.enviarArquivo(mainSocket, clientName, filePath);   
+                            clienteMetodos.enviarArquivo(mainSocket, clientName, filePath);   
                         }
 
                         // Fechando a conexão
                         System.out.println("#Conexão encerrada!");
 
                     } catch (IOException e) {
-                        JOptionPane.showMessageDialog(null, "Servidor não Encontrado "); break;
+                        JOptionPane.showMessageDialog(null, "Servidor não Encontrado "); //break;
                     }
-                }
+/*                 
+            }
 
                 // Perguntar ao usuário se deseja iniciar uma nova conexão ou encerrar o programa
                 escolha = JOptionPane.showInputDialog("Didite qualquer digito para iniciar uma nova conexão ou '0' para Finalizar Conexão:");
@@ -78,5 +79,7 @@ public class Cliente2 {
                 JOptionPane.showMessageDialog(null, "Servidor não Encontrado "); break;
             }
         } while (!escolha.equals("0"));
+*/
     }
+
 }

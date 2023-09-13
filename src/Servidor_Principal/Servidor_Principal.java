@@ -8,7 +8,8 @@ public class Servidor_Principal {
     public static void main(String[] args){
 
         int serverPort = 3000; // Porta do servidor
-        Metodos ServerMetodos = new Metodos(); //Funções Necessarias
+        String nomeServe = "Servidor_Principal";
+        Metodos serverMetodos = new Metodos(); //Funções Necessarias
 
         //Abrindo Conexão do servidor
         try (ServerSocket serverSocket = new ServerSocket(serverPort)) {
@@ -25,7 +26,7 @@ public class Servidor_Principal {
                 // Tratar a conexão em uma thread separada para permitir o atendimento a múltiplos clientes
                 Thread thread = new Thread(() -> {
                     try {
-                        ServerMetodos.receberArquivo(clientSocket);
+                        serverMetodos.receberArquivo(clientSocket, nomeServe);
                     } catch (IOException e) {
                         System.out.println("-> Servidor perdeu Conexão com o cliente!!");
                     }
