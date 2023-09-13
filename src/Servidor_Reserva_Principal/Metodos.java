@@ -37,6 +37,9 @@ public class Metodos {
             clientFolders.put(clientName, saveDir);
         }
 
+        
+        //String servename = new String(br.readLine().getBytes(), "UTF-8");// pode apagar depois.
+        
         // Receber o nome do arquivo
         String fileName = new String(br.readLine().getBytes(), "UTF-8");
 

@@ -10,7 +10,6 @@ public class Servidor_A {
 
         int serverPort = 1000; // Porta do servidor
         int[] clientCount = {0}; // Usando um array para armazenar o contador
-        String[] serveConectNames = {"ServeBalanceador", "ServeCliente"}; // Possiveis servidores que podem ser conectado ao servidor
         String serveNome = "Servidor_A"; // Nome do servidor atual, para uso de cliacão de pasta dos arquivos do cliente
 
         Metodos serverMetodos = new Metodos(); // Funções Necessarias
@@ -26,16 +25,11 @@ public class Servidor_A {
                 Socket clientSocket = serverSocket.accept();
                 System.out.println("\n-----Cliente conectado------\n");
                 
-                //Indentifica qual foi o cliente conectado se foi o balanceador ou um cliente comum
-                String clienteConectado = serverMetodos.nameClient(clientSocket);
-
-                if(clienteConectado.equals(serveConectNames[0])){
-                    // Enviar o valor de clientCount para o Balanceador
-                    PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
-                    out.println(clientCount[0]);
-
-                }else{
-                    // Tratar a conexão em uma thread separada para permitir o atendimento a múltiplos clientes
+                // Enviar o valor de clientCount para o Balanceador
+                PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
+                out.println(clientCount[0]);
+                
+                // Tratar a conexão em uma thread separada para permitir o atendimento a múltiplos clientes
                     Thread thread = new Thread(() -> {
                         // Incrementar o contador de clientes
                         clientCount[0]++;
@@ -56,10 +50,7 @@ public class Servidor_A {
                         }
                     });
                     thread.start();
-                }
-                
             }
-            //chamada do envio do valor do numero de usuarios para o servidor de balanceamento.
         } catch (IOException e) {
             System.out.println("-> Servidor Parou!!");
         }

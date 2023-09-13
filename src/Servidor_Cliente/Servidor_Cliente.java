@@ -13,11 +13,10 @@ public class Servidor_Cliente {
         
         int serverPort = 4000;             // Porta do servidor
         String serveIp = "127.0.0.1";      // IP do Servidor
-        String serveNome = "ServeCliente";
         String escolha;
 
         //Funções de Envio de dados
-        Metodos ClienteMetodos = new Metodos(); //Funções Necessarias
+        Metodos clienteMetodos = new Metodos(); //Funções Necessarias
 
         do {
             try(Socket socket = new Socket(serveIp, serverPort)) {
@@ -43,10 +42,10 @@ public class Servidor_Cliente {
                     String[] parts = redirectInfo.split(":");
                     String redirectServerIp = parts[0];
                     int redirectServerPort = Integer.parseInt(parts[1]);
-                    System.out.println("#Conexão com o servidor de redirecionamento encerrada!");
+                    System.out.println("#Conexão com o servidor de redirecionamento encerrada!"+redirectServerIp+redirectServerPort);
 
                     //Conectar ao servidor de envio
-                    ClienteMetodos.comandoPrincipal(serveNome, redirectServerIp, redirectServerPort);
+                    clienteMetodos.comandoPrincipal(redirectServerIp, redirectServerPort);
                 }
 
                 // Perguntar ao usuário se deseja iniciar uma nova conexão ou encerrar o programa

@@ -9,17 +9,12 @@ import java.net.Socket;
 public class Metodos {
     public int contador(String serverAddress, int serverPort) throws IOException {
         int clientCount; // Valor padrão para retornar em caso de erro
-        String serveNome = "ServeBalanceador";
         //Iniciar a conecão com o servidor
         try (Socket socket = new Socket(serverAddress, serverPort)) {
-            //enviar o seu nome ao servidor
-            PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
-            out.println(serveNome);
-
             //receber valor do contador
             BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             String clientCountString = reader.readLine();
-            clientCount = Integer.parseInt(clientCountString); //diminuir o servidor de balanceamento.
+            clientCount = Integer.parseInt(clientCountString) - 1; //diminuir o servidor de balanceamento.
             
         } catch (IOException e) {
             clientCount = -1;

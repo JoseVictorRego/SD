@@ -8,7 +8,7 @@ public class Servidor_Reserva_Principal {
     public static void main(String[] args){
 
         int serverPort = 5000; // Porta do servidor
-        String nomeServe = "Servidor_Reserva_Principal";
+        String serveNome = "Servidor_Reserva_Principal";
         Metodos serverMetodos = new Metodos(); //Funções Necessarias
 
         //Abrindo Conexão do servidor
@@ -26,7 +26,7 @@ public class Servidor_Reserva_Principal {
                 // Tratar a conexão em uma thread separada para permitir o atendimento a múltiplos clientes
                 Thread thread = new Thread(() -> {
                     try {
-                        serverMetodos.receberArquivo(clientSocket, nomeServe);
+                        serverMetodos.receberArquivo(clientSocket, serveNome);
                     } catch (IOException e) {
                         System.out.println("-> Servidor perdeu Conexão com o cliente!!");
                     }

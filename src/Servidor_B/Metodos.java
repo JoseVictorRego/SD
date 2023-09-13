@@ -17,30 +17,22 @@ import javax.swing.JOptionPane;
 public class Metodos {
     private static Map<String, String> clientFolders = new HashMap<>(); // Mapear o nome do cliente para a pasta
 
-    //Receber o nome do tipo de cliente conectado.
-    public String nameClient(Socket clientSocket)  throws IOException {
-        
-        InputStream is = clientSocket.getInputStream();
-        BufferedReader br = new BufferedReader(new InputStreamReader(is));
-       
-        return new String(br.readLine().getBytes());
-        
-    }
-
-    public void receberArquivo(Socket clientSocket, String serveNome) throws IOException {
-        InputStream is = clientSocket.getInputStream();
-        // Receber o nome do cliente
-        BufferedReader br = new BufferedReader(new InputStreamReader(is));
+    
+    public void receberArquivo(Socket clientSSocket, String nomeServe) throws IOException {
+        InputStream is = clientSSocket.getInputStream();
         
         try {
+            // Receber o nome do cliente
+            BufferedReader br = new BufferedReader(new InputStreamReader(is));
             String clientName = new String(br.readLine().getBytes(), "UTF-8");
+
 
             // Verificar se a pasta do cliente já foi criada
             String saveDir = clientFolders.get(clientName);
             if (saveDir == null) {
                 // Se a pasta ainda não existe, criar uma nova pasta
                 String currentDir = System.getProperty("user.dir");
-                saveDir = currentDir +"\\src\\"+serveNome+"\\"+ "\\arquivos\\" + clientName + "\\";
+                saveDir = currentDir + "\\" + nomeServe + "\\" + clientName + "\\";
                 
                 File directory = new File(saveDir);
                 if (!directory.exists()) {
@@ -52,7 +44,7 @@ public class Metodos {
 
             // Receber o nome do arquivo
             String fileName = new String(br.readLine().getBytes(), "UTF-8");
-
+            System.out.println(fileName);
 
             // Criar um novo arquivo com o nome recebido
             File file = new File(saveDir + fileName);
@@ -72,8 +64,10 @@ public class Metodos {
             System.out.println("Cliente: "+clientName+".\n ->Enviou um Arquivo e foi salvo com sucesso: " + fileName);
 
             // Fechando a conexão com o cliente
-            clientSocket.close();
+            clientSSocket.close(); //depois testar sem.
             System.out.println("Cliente: "+clientName+" Saiu!!\n");
+
+            //-----------------------------------------------------------------------------------
             
             //envio dos arquivos para o servidor Principal
             servePrincipal(clientName, saveDir + fileName);
