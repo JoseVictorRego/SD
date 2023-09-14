@@ -5,7 +5,11 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.Socket;
+import java.util.Hashtable;
 
+import javax.naming.NamingException;
+import javax.naming.directory.Attributes;
+import javax.naming.directory.InitialDirContext;
 import javax.swing.JOptionPane;
 
 public class Metodos {
@@ -75,6 +79,25 @@ public class Metodos {
             } 
 
             JOptionPane.showMessageDialog(null, "Arquivo enviado com sucesso.");
+        }
+    }
+
+    public static String getServerIpFromDns() {
+        String servidorDns = "192.168.1.18:52";
+        String nomeHost = "servidorsdjorge.balanceador";
+        
+        Hashtable<String, String> env = new Hashtable<>();
+        env.put("java.naming.factory.initial", "com.sun.jndi.dns.DnsContextFactory");
+        env.put("java.naming.provider.url", "dns://" + servidorDns);
+
+        try {
+            InitialDirContext idc = new InitialDirContext(env);
+            Attributes attrs = idc.getAttributes(nomeHost, new String[] {"A"});
+            return attrs.get("A").get().toString();
+        } catch (NamingException e) {
+            e.printStackTrace();
+            System.out.println("Falha na resolução do nome do host.");
+            return "127.0.0.1"; // valor padrão em caso de erro
         }
     }
 }

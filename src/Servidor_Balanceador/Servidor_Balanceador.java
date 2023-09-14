@@ -8,13 +8,13 @@ public class Servidor_Balanceador {
     public static void main(String[] args) {
 
         int serverPort = 4000; // Porta do servidor de redirecionamento
-        
-        //Sevidores
-        String serverAddress = "127.0.0.1";  // Endereço do servidor
-        int[] Sevidor_Port ={1000,2000};     // Porta do servidor
 
         //Chamando os Metodos
         Metodos serverBalanceadorMetodos = new Metodos();
+
+                //Sevidores
+        String[] serverAddress = {serverBalanceadorMetodos.getServerIpFromDns("servidorsdjorge.server1"),serverBalanceadorMetodos.getServerIpFromDns("servidorsdjorge.server2")};  // Endereço do servidor
+        int[] Sevidor_Port ={1000,2000};     // Porta do servidor
 
         //Iniciando o Servidor
         try (ServerSocket serverSocket = new ServerSocket(serverPort)) {
@@ -27,8 +27,8 @@ public class Servidor_Balanceador {
                 Socket clientSocket = serverSocket.accept();
                 System.out.println("\n-----Cliente conectado ao servidor de Redirecionamento------\n");
                 
-                int contadorServeA = serverBalanceadorMetodos.contador(serverAddress, Sevidor_Port[0]);
-                int contadorServeB = serverBalanceadorMetodos.contador(serverAddress, Sevidor_Port[1]);
+                int contadorServeA = serverBalanceadorMetodos.contador(serverAddress[0], Sevidor_Port[0]);
+                int contadorServeB = serverBalanceadorMetodos.contador(serverAddress[1], Sevidor_Port[1]);
 
                 System.out.println(contadorServeA+":"+contadorServeB);
                 
@@ -44,7 +44,7 @@ public class Servidor_Balanceador {
                             clientSocket.getOutputStream().write(redirectMessage.getBytes());
                         }else{
                             System.out.println("Clientes conectados nos servidores-> "+contadorServeA+":"+contadorServeB);
-                            serverBalanceadorMetodos.redirecionar(clientSocket, serverAddress, Sevidor_Port[escolha]);
+                            serverBalanceadorMetodos.redirecionar(clientSocket, serverAddress[escolha], Sevidor_Port[escolha]);
                         }
                         
                         // Fechar a conexão com o cliente após o redirecionamento
