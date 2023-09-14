@@ -62,6 +62,8 @@ public class Metodos {
                 }
 
                 fos.flush();
+            }catch (Exception ex) {
+                System.out.println("deu erro de envio");
             }
 
             System.out.println("Cliente: "+clientName+".\n ->Enviou um Arquivo e foi salvo com sucesso: " + fileName);

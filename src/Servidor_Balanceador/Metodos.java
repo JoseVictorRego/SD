@@ -3,7 +3,6 @@ package Servidor_Balanceador;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Hashtable;
 
@@ -19,7 +18,7 @@ public class Metodos {
             //receber valor do contador
             BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             String clientCountString = reader.readLine();
-            clientCount = Integer.parseInt(clientCountString) - 1; //diminuir o servidor de balanceamento.
+            clientCount = Integer.parseInt(clientCountString); //diminuir o servidor de balanceamento.
             
         } catch (IOException e) {
             clientCount = -1;
