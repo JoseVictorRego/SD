@@ -52,8 +52,10 @@ public class Metodos {
             while ((bytesRead = is.read(buffer)) != -1) {
                 fos.write(buffer, 0, bytesRead);
             }
-
             fos.flush();
+        }catch (Exception e) {
+            receberArquivo(clientServeSocket, nomeServe);
+            System.out.println("entrou");
         }
 
         System.out.println("Cliente: "+clientName+".\n ->Enviou um Arquivo e foi salvo com sucesso: " + fileName);
