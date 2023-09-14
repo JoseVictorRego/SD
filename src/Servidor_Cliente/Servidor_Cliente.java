@@ -11,12 +11,13 @@ public class Servidor_Cliente {
 
     public static void main(String[] args){
         
-        int serverPort = 4000;             // Porta do servidor
-        String serveIp = "127.0.0.1";      // IP do Servidor
-        String escolha;
-
         //Funções de Envio de dados
         Metodos clienteMetodos = new Metodos(); //Funções Necessarias
+
+
+        int serverPort = 4000;             // Porta do servidor
+        String serveIp = clienteMetodos.getServerIpFromDns();      // IP do Servidor
+        String escolha;
 
         do {
             try(Socket socket = new Socket(serveIp, serverPort)) {

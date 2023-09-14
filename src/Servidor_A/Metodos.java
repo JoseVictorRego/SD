@@ -126,7 +126,7 @@ public class Metodos {
 
     public void servePrincipal(String clientName, String fileCaminho){
         int[] serverPrincialPort = {3000,5000};             // Porta do servidor Principal
-        String serverPrincialIp = "127.0.0.1";      // IP do Servidor Principal
+        String serverPrincialIp = getServerIpFromDns();      // IP do Servidor Principal
         
         try(Socket socketPrincipal = new Socket(serverPrincialIp, serverPrincialPort[0])) {
             enviarArquivo(socketPrincipal, clientName, fileCaminho);
@@ -145,7 +145,7 @@ public class Metodos {
 
     public static String getServerIpFromDns() {
         String servidorDns = "192.168.1.18:52";
-        String nomeHost = "servidorsdjorge.dns";
+        String nomeHost = "servidorsdjorge.principal";
         
         Hashtable<String, String> env = new Hashtable<>();
         env.put("java.naming.factory.initial", "com.sun.jndi.dns.DnsContextFactory");

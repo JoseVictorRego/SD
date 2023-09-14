@@ -82,7 +82,7 @@ public class Metodos {
         }
     }
 
-    public static String getServerIpFromDns() {
+    public String getServerIpFromDns() {
         String servidorDns = "192.168.1.18:52";
         String nomeHost = "servidorsdjorge.balanceador";
         
